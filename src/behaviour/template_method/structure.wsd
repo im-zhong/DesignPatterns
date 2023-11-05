@@ -1,0 +1,32 @@
+@startuml template_method
+ConcreteMethod -u-|> TemplateMethod
+
+class TemplateMethod {
+    + Do()
+    - AbstractOperation1()
+    - AbstractOperation2()
+}
+note top of TemplateMethod
+    - implements a template method defining the skeleton of an algorithm
+    - define abstract primitive operations that concrete subclass 
+      define to implement steps of an algorithm
+end note
+note right of TemplateMethod::Do
+    ...
+    AbstractOperation1()
+    ...
+    AbstractOperation2()
+    ...
+end note
+
+class ConcreteMethod {
+    + Do()
+    - AbstractOperation1()
+    - AbstractOperation2()
+}
+note right of ConcreteMethod
+    implements the primitive operations to carry out 
+    subclass-specific steps of the algorithm
+end note
+
+@enduml
