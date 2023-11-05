@@ -1,4 +1,4 @@
-@startuml
+@startuml strategy
 Client -> Context : new Context(DefaultStrategy())
 Client -> Context : SetNecessaryInfomation(...)
 Client -> Context : Do()
