@@ -1,0 +1,8 @@
+@startuml memento
+aCaretaker -> anOriginator: createMemento()
+anOriginator -> aMemento: new Memento()
+anOriginator -> aMemento: SetState()
+... after a while ...
+aCaretaker -> anOriginator: SetMemento(aMemento)
+anOriginator -> aMemento: GetState()
+@enduml

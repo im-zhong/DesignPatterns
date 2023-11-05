@@ -1,0 +1,36 @@
+@startuml memento_class
+Originator ..> Memento
+Caretaker o--> Memento
+
+class Originator {
+    - state
+    + SetMemento(Memento m)
+    + CreateMemento()
+}
+note top of Originator
+    - creates a memento containing a snapshot of its current intenal state
+    - uses the memento to restore its internal state
+end note
+note left of Originator::SetMemento
+    state = m->GetState()
+end note
+note left of Originator::CreateMemento
+    return new Memento(state)
+end note
+
+class Memento {
+    - state
+    - GetState()
+    - SetState()
+}
+note bottom of Memento
+    - stores internal state of the Originator object
+    - Mementos have effectively two interfaces, Caretaker sees a narrow interface. Originator in contrast, sees a wide interface
+end note
+
+class Caretaker {}
+note right of Caretaker
+    - responsible for the memento's safekeeping
+    - never operates on or examines the contents of a memento
+end note
+@enduml
