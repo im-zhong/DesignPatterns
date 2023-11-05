@@ -1,0 +1,11 @@
+@startuml
+Client -> Context : new Context(DefaultStrategy())
+Client -> Context : SetNecessaryInfomation(...)
+Client -> Context : Do()
+Context -> DefaultStrategy : Do()
+DefaultStrategy -> Context : GetNecessaryInfomation()
+DefaultStrategy -> DefaultStrategy : DoSomething
+... after a while, client want to choose another strategy ...
+Client -> Context : SetStrategy(ConcreteStrategyA())
+... continuing ...
+@enduml

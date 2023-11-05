@@ -1,0 +1,38 @@
+@startuml strategy
+Context o-r-> Strategy : strategy
+
+ConcreteStrategyA -u-|> Strategy
+ConcreteStrategyB -u-|> Strategy
+ConcreteStrategyC -u-|> Strategy
+
+class Context {
+    + ClientInterface()
+}
+note top of Context
+    - Context maintains a reference to a Strategy object.
+    - Client specifies the strategy to use.
+    - Whenever Client want to do something, Context delegates the job to the Strategy object.
+end note
+
+class Strategy {
+    + AlgorithmInterface()
+}
+note right of Strategy
+    - declares an interface common to all supported algorithms.
+end note
+
+class ConcreteStrategyA {
+    + AlgorithmInterface()
+}
+note bottom of ConcreteStrategyA
+    - implements the algorithm using the Strategy interface.
+end note
+
+class ConcreteStrategyB {
+    + AlgorithmInterface()
+}
+
+class ConcreteStrategyC {
+    + AlgorithmInterface()
+}
+@enduml
