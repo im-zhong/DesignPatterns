@@ -1,0 +1,54 @@
+@startuml observer
+Subject -r-> Observer : observers
+ConcreteSubject -u-|> Subject
+ConcreteObserver -u-|> Observer
+ConcreteObserver -l-> ConcreteSubject : subject
+
+abstract class Subject{
+    + Attach()
+    + Detach()
+    + Notify()
+}
+note top of Subject
+    - knows its observers. Any number of Observer objects may observe a subject
+    - provides an interface for attaching and detaching Observer objects
+end note
+note left of Subject::Notify
+    for observer in observers
+        observer->Update()
+end note
+
+abstract class Observer{
+    + Update()
+}
+note right of Observer
+    define an updating interface for objects that 
+    should be notified of changes in a subject
+end note
+
+class ConcreteSubject{
+    + GetState()
+    + SetState()
+    - subject_state_
+}
+note bottom of ConcreteSubject
+    - ?stores state of interest to ConcreteObserver objects
+    - sends a notification to its observers when its state changes
+end note
+note left of ConcreteSubject::GetState
+    return subject_state_
+end note
+
+class ConcreteObserver{
+    + Update()
+    - observer_state_
+}
+note bottom of ConcreteObserver
+    - maintains a reference to a ConcreteSubject object
+    - stores state that should stay consistent with the subject's
+    - implements the Observer updating interface to keep its state consistent with the subject's
+end note
+note right of ConcreteObserver::Update
+    observer_state_ = subject->GetState()
+end note
+@enduml

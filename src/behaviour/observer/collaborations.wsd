@@ -1,0 +1,16 @@
+@startuml observer
+Context -> aConcreteSubject: SetState()
+aConcreteSubject -> aConcreteSubject: Notify()
+note left
+    ConcreteSubject notifies its observers whenever a change occurs 
+    that could make its observers's state inconsistent with its own.
+end note
+aConcreteSubject -> aConcreteObserver: Update()
+aConcreteObserver -> aConcreteSubject: GetState()
+note right
+    ConcreteObserver may query the subject for infomation.
+    ConcureteObserver uses this information to reconcile its state with that of the subject.
+end note
+aConcreteSubject -> anotherConcreteObserver: Update()
+anotherConcreteObserver -> aConcreteSubject: GetState()
+@enduml
