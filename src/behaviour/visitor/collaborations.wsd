@@ -1,0 +1,21 @@
+@startuml visitor
+' defining the order of the participants
+participant Compiler as Compiler
+participant ProgramAST as ProgramAST
+participant AssignmentNode as AssignmentNode
+participant VariableReferenceNode as VariableReferenceNode
+participant TypeCheckingVisitor as TypeCheckingVisitor
+
+Compiler -> ProgramAST : Traverse(new TypeCheckingVisitor())
+ProgramAST -> AssignmentNode : Accept(visitor)
+AssignmentNode -> TypeCheckingVisitor : VisitAssignmentNode(node)
+TypeCheckingVisitor -> AssignmentNode : DoTypeChecking()
+
+ProgramAST -> VariableReferenceNode : Accept(visitor)
+VariableReferenceNode -> TypeCheckingVisitor : VisitAssignmentNode(node)
+TypeCheckingVisitor -> VariableReferenceNode : DoTypeChecking()
+
+... after a while ...
+Compiler -> ProgramAST : Traverse(new CodeGenerationVisitor())
+... same as above ...
+@enduml

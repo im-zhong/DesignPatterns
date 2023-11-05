@@ -1,0 +1,57 @@
+@startuml visitor
+
+ProgramAST o-r-> Node
+AssignmentNode -u-|> Node
+VariableReferenceNode -u-|> Node
+
+TypeCheckingVisitor -u-|> NodeVisitor
+CodeGenerationVisitor -u-|> NodeVisitor
+
+class ProgramAST {
+    + Traverse(NodeVisitor* visitor)
+}
+note top of ProgramAST
+    - declares a Traverse operation that accepts a NodeVisitor 
+      to perform specific operation, such as type checking or code generation
+end note
+
+class Node {
+    + Accept(NodeVisitor* visitor)
+}
+
+class AssignmentNode {
+    + Accept(NodeVisitor* visitor)
+}
+note bottom of AssignmentNode
+    visitor->VisitAssignmentNode(this)
+end note
+
+class VariableReferenceNode {
+    + Accept(NodeVisitor* visitor)
+}
+note bottom of VariableReferenceNode
+    visitor->VisitVariableReferenceNode(this)
+end note
+
+class NodeVisitor {
+    + VisitAssignmentNode(AssignmentNode* node)
+    + VisitVariableReferenceNode(VariableReferenceNode* node)
+}
+note top of NodeVisitor
+    - declares a Visit operation for each class in the Node hierarchy
+end note
+
+class TypeCheckingVisitor {
+    + VisitAssignmentNode(AssignmentNode* node)
+    + VisitVariableReferenceNode(VariableReferenceNode* node)
+}
+note top of TypeCheckingVisitor
+    implements the Visit operations declared by NodeVisitor
+end note
+
+class CodeGenerationVisitor {
+    + VisitAssignmentNode(AssignmentNode* node)
+    + VisitVariableReferenceNode(VariableReferenceNode* node)
+}
+
+@enduml
