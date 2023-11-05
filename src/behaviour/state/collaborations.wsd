@@ -1,0 +1,11 @@
+@startuml state
+Client -> TCPConnection: ActiveOpen()
+TCPConnection -> TCPClosed: ActiveOpen()
+TCPClosed -> TCPClosed: SYN, ACK, ...
+TCPClosed -> TCPConnection: ChangeState(TCPEstablised::Instance())
+Client -> TCPConnection: Send()
+TCPConnection -> TCPEstablised: Send()
+TCPEstablised -> TCPEstablised: DoSomething()
+TCPEstablised -> TCPConnection: ChangeState(SomeOhterState)
+... continuing ...
+@enduml

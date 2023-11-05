@@ -1,0 +1,47 @@
+@startuml state
+TCPConnection o-r-> TCPState : state
+TCPEstablished -u-|> TCPState
+TCPListen -u-|> TCPState
+TCPClosed -u-|> TCPState
+
+class TCPConnection {
+    + Open()
+    + Close()
+    + Acknowledge()
+}
+note top of TCPConnection
+    - defines the interface to clients
+    - maintains a state object that represnets the current state of the TCP connection
+    - delegates all state-specific requests to the state object
+end note
+note left of TCPConnection::Open
+    state->Open()
+end note
+
+class TCPState {
+    + Open()
+    + Close()
+    + Acknowledge()
+}
+note top of TCPState
+    Subclasses of TCPState implement state-specific behaviour
+end note
+
+class TCPEstablished {
+    + Open()
+    + Close()
+    + Acknowledge()
+}
+
+class TCPListen {
+    + Open()
+    + Close()
+    + Acknowledge()
+}
+
+class TCPClosed {
+    + Open()
+    + Close()
+    + Acknowledge()
+}
+@enduml
