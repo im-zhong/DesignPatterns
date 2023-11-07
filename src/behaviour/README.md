@@ -1,6 +1,7 @@
 # Behavioral Patterns
 
 Principle:
+
 - 单一职责
 - 引入间接性
 - 封装，委托
@@ -20,6 +21,5 @@ Behavioral pattenrs are concerned with algorithms and the assignment of **respos
   - Command
   - State
   - Visitor
-  - 
 
 Well-designed object-oriented systems are just like this: they have multiple patterns embedded in them, but not because their designers necessarily thought in these terms. Rather, their designers have a good sense of what works well and what doesn't.
